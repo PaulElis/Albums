@@ -1,5 +1,5 @@
 import React from 'react'
-import {View, Text} from 'react-native'
+import {View, Text } from 'react-native'
 import AlbumDetail from './AlbumDetail'
 
 const URL = 'https://rallycoding.herokuapp.com/api/music_albums'
