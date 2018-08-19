@@ -1,5 +1,5 @@
 import React from 'react'
-import {View, Text } from 'react-native'
+import {ScrollView, Text } from 'react-native'
 import AlbumDetail from './AlbumDetail'
 
 const URL = 'https://rallycoding.herokuapp.com/api/music_albums'
@@ -25,11 +25,11 @@ class AlbumList extends React.Component {
   }
 
   render(){
-    console.log(this.state)
+    // console.log(this.state)
     return(
-      <View>
+      <ScrollView>
         {this.renderAlbums()}
-      </View>
+      </ScrollView>
     )
   }
 }
