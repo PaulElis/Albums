@@ -5,7 +5,7 @@ import CardSection from './CardSection'
 import Button from './Button'
 
 const AlbumDetail = ({album}) => {
-  const {title, artist, thumbnail_image, image, url} = album
+  // const {name, artist, thumbnail_image, image, url} = album
   const {
     thumbnailStyle,
     headerContentStyle,
@@ -18,29 +18,29 @@ const AlbumDetail = ({album}) => {
     <Card>
       <CardSection>
         <View style={thumbnailContainerStyle}>
-          <Image
+          {/* <Image
             style={thumbnailStyle}
-            source={{uri: thumbnail_image}}
-          />
+            source={{uri: props.thumbnail_image}}
+          /> */}
         </View>
         <View style={headerContentStyle}>
-          <Text style={headerTextStyle}>{title}</Text>
-          <Text>{artist}</Text>
+          <Text style={headerTextStyle}>{album.name}</Text>
+          <Text>{album.artist.name}</Text>
         </View>
       </CardSection>
 
       <CardSection>
         <Image
           style={imageStyle}
-          source={{uri: image}}
+          source={{uri: album.image[2]['#text']}}
          />
       </CardSection>
 
-      <CardSection>
+      {/* <CardSection>
         <Button onPress={() => Linking.openURL(url)}>
           Buy Now
         </Button>
-      </CardSection>
+      </CardSection> */}
     </Card>
   )
 }
