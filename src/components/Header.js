@@ -9,14 +9,11 @@ class Header extends React.Component {
     text: '',
   }
 
-  handleChange = event => {
-    this.setState({
-      text: event.target.value
-    })
+  updateText = () => {
+    console.log('in updateText')
   }
 
   render(){
-    // const { textStyle, viewStyle, searchStyle } = styles
     console.log(this.state)
     return (
       <View style={styles.viewStyle}>
@@ -24,7 +21,11 @@ class Header extends React.Component {
         <Form>
           <Item rounded style={styles.searchStyle}>
             <Icon active name='search' />
-            <Input onChange={this.handleChange} value={this.state.text} placeholder='Search'/>
+            <Input
+              onSubmitEditing={(event) => this.updateText(event.nativeEvent.text)}
+              onChangeText={(text) => this.setState({text})}
+              value={this.state.text}
+              placeholder='Search'/>
           </Item>
         </Form>
       </View>

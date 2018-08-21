@@ -5,7 +5,6 @@ import CardSection from './CardSection'
 import Button from './Button'
 
 const AlbumDetail = ({album}) => {
-  // const {name, artist, thumbnail_image, image, url} = album
   const {
     thumbnailStyle,
     headerContentStyle,
@@ -25,7 +24,6 @@ const AlbumDetail = ({album}) => {
         </View>
         <View style={headerContentStyle}>
           <Text style={headerTextStyle}>{album.name}</Text>
-          {/* <Text>{album.artist.name}</Text> */}
           <Text onPress={() => Linking.openURL(album.artist.url)}>
             {album.artist.name}
           </Text>

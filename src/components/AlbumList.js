@@ -9,18 +9,8 @@ class AlbumList extends React.Component {
     albums: []
   }
 
-  // componentWillMount(){
-  //   fetch(URL)
-  //     .then(response => response.json())
-  //     .then(response =>
-  //       this.setState({
-  //         albums: response
-  //     })
-  //   )
-  // }
-
   componentWillMount(){
-    fetch('http://ws.audioscrobbler.com/2.0/?method=artist.gettopalbums&artist=abba&api_key=3fc3ddd7b32c043fd9f61677911236cc&format=json')
+    fetch('http://ws.audioscrobbler.com/2.0/?method=artist.gettopalbums&artist=eminem&api_key=3fc3ddd7b32c043fd9f61677911236cc&format=json')
       .then(response => response.json())
       .then(response =>
         this.setState({
