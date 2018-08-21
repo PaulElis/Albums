@@ -1,21 +1,35 @@
 import React from 'react'
-import { Text, View } from 'react-native'
+import { Text, View, TextInput } from 'react-native'
 
 
-const Header = (props) => {
-  const { textStyle, viewStyle } = styles
+// const Header = (props) => {
+class Header extends React.Component {
+  state = {
+    text: '',
+  }
 
-  return (
-    <View style={viewStyle}>
-      <Text style={textStyle}>Albums{props.headerText}</Text>
-    </View>
-  )
+  render(){
+    // const { textStyle, viewStyle, searchStyle } = styles
+    return (
+      <View style={styles.viewStyle}>
+        <Text style={styles.textStyle}>Albums{this.props.headerText}</Text>
+        <TextInput
+          style={styles.searchStyle}
+          onChangeText={(text) => this.setState({text})}
+          value={this.state.text}
+        />
+      </View>
+    )
+  }
 }
+
+export default Header
 
 const styles = {
   viewStyle: {
     backgroundColor: '#F8F8F8',
-    justifyContent: 'center',
+    justifyContent: 'space-evenly',
+    flexDirection: 'row',
     alignItems: 'center',
     height: 60,
     paddingTop: 15,
@@ -27,8 +41,12 @@ const styles = {
   },
   textStyle: {
     fontSize: 20
+  },
+  searchStyle: {
+    height: 40,
+    width: 100,
+    backgroundColor: 'white'
+    // borderColor: 'white',
+    // borderWidth: 10
   }
 }
-
-
-export default Header

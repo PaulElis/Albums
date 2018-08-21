@@ -25,7 +25,10 @@ const AlbumDetail = ({album}) => {
         </View>
         <View style={headerContentStyle}>
           <Text style={headerTextStyle}>{album.name}</Text>
-          <Text>{album.artist.name}</Text>
+          {/* <Text>{album.artist.name}</Text> */}
+          <Text onPress={() => Linking.openURL(album.artist.url)}>
+            {album.artist.name}
+          </Text>
         </View>
       </CardSection>
 
@@ -36,11 +39,11 @@ const AlbumDetail = ({album}) => {
          />
       </CardSection>
 
-      {/* <CardSection>
-        <Button onPress={() => Linking.openURL(url)}>
-          Buy Now
+      <CardSection>
+        <Button onPress={() => Linking.openURL(album.url)}>
+          View Album
         </Button>
-      </CardSection> */}
+      </CardSection>
     </Card>
   )
 }
