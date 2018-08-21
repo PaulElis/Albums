@@ -1,5 +1,6 @@
 import React from 'react'
 import { Text, View, TextInput } from 'react-native'
+import { Form, Item, Input, Icon } from 'native-base';
 
 
 // const Header = (props) => {
@@ -8,16 +9,24 @@ class Header extends React.Component {
     text: '',
   }
 
+  handleChange = event => {
+    this.setState({
+      text: event.target.value
+    })
+  }
+
   render(){
     // const { textStyle, viewStyle, searchStyle } = styles
+    console.log(this.state)
     return (
       <View style={styles.viewStyle}>
         <Text style={styles.textStyle}>Albums{this.props.headerText}</Text>
-        <TextInput
-          style={styles.searchStyle}
-          onChangeText={(text) => this.setState({text})}
-          value={this.state.text}
-        />
+        <Form>
+          <Item rounded style={styles.searchStyle}>
+            <Icon active name='search' />
+            <Input onChange={this.handleChange} value={this.state.text} placeholder='Search'/>
+          </Item>
+        </Form>
       </View>
     )
   }
@@ -43,8 +52,8 @@ const styles = {
     fontSize: 20
   },
   searchStyle: {
-    height: 40,
-    width: 100,
+    height: 25,
+    width: 150,
     backgroundColor: 'white'
     // borderColor: 'white',
     // borderWidth: 10
