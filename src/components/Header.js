@@ -11,12 +11,13 @@ class Header extends React.Component {
     query: '',
   }
 
-  updateText = (query) => {
+  search = (query) => {
+    // console.log('Header line 17 in updateText', query)
     this.props.runSearch(query)
   }
 
   render(){
-    console.log(this.state)
+    console.log('header props', this.props)
     return (
       <View style={styles.viewStyle}>
         <Text style={styles.textStyle}>Albums{this.props.headerText}</Text>
@@ -24,7 +25,7 @@ class Header extends React.Component {
           <Item rounded style={styles.searchStyle}>
             <Icon active name='search' />
             <Input
-              onSubmitEditing={(event) => this.updateText(event.nativeEvent.text)}
+              onSubmitEditing={(event) => this.search(event.nativeEvent.text)}
               onChangeText={(query) => this.setState({query})}
               value={this.state.query}
               returnKeyType="search"
@@ -39,6 +40,7 @@ class Header extends React.Component {
 function mapStateToProps(state){
   return {
     query: state.query,
+    albums: state.albums
   }
 }
 
