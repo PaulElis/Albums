@@ -1,16 +1,18 @@
 import React from 'react'
 import { Text, View, TextInput } from 'react-native'
-import { Form, Item, Input, Icon } from 'native-base';
+import { Form, Item, Input, Icon } from 'native-base'
+
+import { runSearch } from '../actions/actions'
+import { connect } from 'react-redux'
 
 
-// const Header = (props) => {
 class Header extends React.Component {
   state = {
-    text: '',
+    query: '',
   }
 
-  updateText = () => {
-    console.log('in updateText')
+  updateText = (query) => {
+    this.props.runSearch(query)
   }
 
   render(){
@@ -23,8 +25,9 @@ class Header extends React.Component {
             <Icon active name='search' />
             <Input
               onSubmitEditing={(event) => this.updateText(event.nativeEvent.text)}
-              onChangeText={(text) => this.setState({text})}
-              value={this.state.text}
+              onChangeText={(query) => this.setState({query})}
+              value={this.state.query}
+              returnKeyType="search"
               placeholder='Search'/>
           </Item>
         </Form>
@@ -33,7 +36,15 @@ class Header extends React.Component {
   }
 }
 
-export default Header
+function mapStateToProps(state){
+  return {
+    query: state.query,
+  }
+}
+
+// export default Header
+export default connect(mapStateToProps, {runSearch})(Header)
+
 
 const styles = {
   viewStyle: {
@@ -56,7 +67,5 @@ const styles = {
     height: 25,
     width: 150,
     backgroundColor: 'white'
-    // borderColor: 'white',
-    // borderWidth: 10
   }
 }
