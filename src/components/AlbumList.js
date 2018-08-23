@@ -8,9 +8,9 @@ import { connect } from 'react-redux'
 // const URL = 'https://rallycoding.herokuapp.com/api/music_albums'
 
 class AlbumList extends React.Component {
-  // state = {
-  //   albums: []
-  // }
+  state = {
+    albums: null,
+  }
 
   // componentWillMount(){
   //   fetch('http://ws.audioscrobbler.com/2.0/?method=artist.gettopalbums&artist=eminem&api_key=3fc3ddd7b32c043fd9f61677911236cc&format=json')
@@ -22,27 +22,32 @@ class AlbumList extends React.Component {
   //   )
   // }
 
-  componentDidMount(){
-    console.log('in did mount')
-    this.props.runSearch('eminem')
+  static getDerivedStateFromProps(nextProps, prevState) {
+    return {
+      albums: nextProps.albums ? nextProps.albums.album: ''
+    }
   }
 
-  handleRunSearch(query){
-    console.log('in handleRunSearch')
-    this.props.runSearch(query)
+  componentDidMount(){
+    // this.props.runSearch('eminem')
   }
+
+  // handleRunSearch(query){
+  //   console.log('in handleRunSearch')
+  //   this.props.runSearch(query)
+  // }
 
   renderAlbums = () => {
-    return this.props.albums.topalbums.album.map(album =>
+    return this.state.albums.map(album =>
       <AlbumDetail key={album.url} album={album}/>)
   }
 
   render(){
     console.log('AlbumList props', this.props)
+    console.log('AlbumList state', this.state)
     return(
       <ScrollView>
-        {this.props.albums.length ? this.renderAlbums() : <View><Text>No Albums</Text></View>}
-        {/* {this.renderAlbums()} */}
+        {this.state.albums ? this.renderAlbums() : <View><Text>No Albums</Text></View>}
       </ScrollView>
     )
   }
@@ -50,10 +55,8 @@ class AlbumList extends React.Component {
 
 function mapStateToProps(state){
   return {
-    albums: state.albums,
+    albums: state.albums.topalbums,
   }
 }
 
-// export default Header
 export default connect(mapStateToProps, {runSearch})(AlbumList)
-// export default AlbumList

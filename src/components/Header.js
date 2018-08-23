@@ -17,7 +17,7 @@ class Header extends React.Component {
   }
 
   render(){
-    console.log('header props', this.props)
+    // console.log('header props', this.props)
     return (
       <View style={styles.viewStyle}>
         <Text style={styles.textStyle}>Albums{this.props.headerText}</Text>
