@@ -44,7 +44,6 @@ function mapStateToProps(state){
   }
 }
 
-// export default Header
 export default connect(mapStateToProps, {runSearch})(Header)
 
 

@@ -1,53 +1,56 @@
 import React from 'react'
 import {ScrollView, Text, View } from 'react-native'
 import AlbumDetail from './AlbumDetail'
+import ArtistDetail from './ArtistDetail'
 
 import { runSearch } from '../actions/actions'
 import { connect } from 'react-redux'
 
-// const URL = 'https://rallycoding.herokuapp.com/api/music_albums'
-
 class AlbumList extends React.Component {
   state = {
     albums: null,
+    artists: null,
   }
-
-  // componentWillMount(){
-  //   fetch('http://ws.audioscrobbler.com/2.0/?method=artist.gettopalbums&artist=eminem&api_key=3fc3ddd7b32c043fd9f61677911236cc&format=json')
-  //     .then(response => response.json())
-  //     .then(response =>
-  //       this.setState({
-  //         albums: response.topalbums.album
-  //     })
-  //   )
-  // }
 
   static getDerivedStateFromProps(nextProps, prevState) {
     return {
-      albums: nextProps.albums ? nextProps.albums.album: ''
+      albums: nextProps.albums ? nextProps.albums.album : null,
+      artists: nextProps.artists ? nextProps : null,
     }
   }
 
   componentDidMount(){
-    // this.props.runSearch('eminem')
+    this.fetchArtists()
   }
 
-  // handleRunSearch(query){
-  //   console.log('in handleRunSearch')
-  //   this.props.runSearch(query)
-  // }
+  fetchArtists = () => {
+    // console.log('in fetchArtists')
+    fetch('http://ws.audioscrobbler.com/2.0/?method=chart.gettopartists&api_key=3fc3ddd7b32c043fd9f61677911236cc&format=json')
+      .then(res => res.json())
+      .then(artists => this.setState({
+        artists: artists.artists.artist})
+      )
+  }
 
   renderAlbums = () => {
     return this.state.albums.map(album =>
       <AlbumDetail key={album.url} album={album}/>)
   }
 
+// render Artists
+  renderArtists = () => {
+    return this.state.artists.map(artist =>
+      <ArtistDetail key={artist.url} artist={artist}/>)
+  }
+
   render(){
-    console.log('AlbumList props', this.props)
-    console.log('AlbumList state', this.state)
+    // console.log('AlbumList props', this.props)
+    console.log('AlbumList state:', this.state)
     return(
       <ScrollView>
-        {this.state.albums ? this.renderAlbums() : <View><Text>No Albums</Text></View>}
+      {/* Implement this.renderArtists() */}
+        {/* {this.state.albums ? this.renderAlbums() : this.renderArtists()} */}
+        {this.state.artists ? this.renderArtists() : ''}
       </ScrollView>
     )
   }
