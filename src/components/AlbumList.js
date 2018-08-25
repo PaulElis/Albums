@@ -15,7 +15,7 @@ class AlbumList extends React.Component {
   static getDerivedStateFromProps(nextProps, prevState) {
     return {
       albums: nextProps.albums ? nextProps.albums.album : null,
-      artists: nextProps.artists ? nextProps : null,
+      artists: nextProps.albums === null ? null : '',
     }
   }
 
@@ -24,7 +24,6 @@ class AlbumList extends React.Component {
   }
 
   fetchArtists = () => {
-    // console.log('in fetchArtists')
     fetch('http://ws.audioscrobbler.com/2.0/?method=chart.gettopartists&api_key=3fc3ddd7b32c043fd9f61677911236cc&format=json')
       .then(res => res.json())
       .then(artists => this.setState({
@@ -33,24 +32,20 @@ class AlbumList extends React.Component {
   }
 
   renderAlbums = () => {
-    return this.state.albums.map(album =>
-      <AlbumDetail key={album.url} album={album}/>)
+    return this.state.albums ? this.state.albums.map(album =>
+      <AlbumDetail key={album.url} album={album}/>) : ''
   }
 
-// render Artists
   renderArtists = () => {
-    return this.state.artists.map(artist =>
-      <ArtistDetail key={artist.url} artist={artist}/>)
+    return this.state.artists ? this.state.artists.map(artist =>
+      <ArtistDetail key={artist.url} artist={artist}/>) : ''
   }
 
   render(){
-    // console.log('AlbumList props', this.props)
     console.log('AlbumList state:', this.state)
     return(
       <ScrollView>
-      {/* Implement this.renderArtists() */}
-        {/* {this.state.albums ? this.renderAlbums() : this.renderArtists()} */}
-        {this.state.artists ? this.renderArtists() : ''}
+        {this.state.artists ? this.renderArtists() : this.renderAlbums()}
       </ScrollView>
     )
   }

@@ -16,14 +16,14 @@ const AlbumDetail = ({album}) => {
   return(
     <Card>
       <CardSection>
-        <View style={thumbnailContainerStyle}>
-          {/* <Image
+        {/* <View style={thumbnailContainerStyle}>
+          <Image
             style={thumbnailStyle}
             source={{uri: props.thumbnail_image}}
-          /> */}
-        </View>
+          />
+        </View> */}
         <View style={headerContentStyle}>
-          <Text style={headerTextStyle}>{album.name}</Text>
+          <Text style={headerTextStyle}>{album.name !== '(null)' ? album.name : 'Artist'}</Text>
           <Text onPress={() => Linking.openURL(album.artist.url)}>
             {album.artist.name}
           </Text>
@@ -33,7 +33,8 @@ const AlbumDetail = ({album}) => {
       <CardSection>
         <Image
           style={imageStyle}
-          source={{uri: album.image[2]['#text']}}
+          source={album.image[2]['#text'] ?
+           {uri: album.image[2]['#text']} : {uri: 'https://static.vecteezy.com/system/resources/previews/000/017/933/non_2x/vector-free-vinyl-record.jpg'}}
          />
       </CardSection>
 
@@ -48,8 +49,10 @@ const AlbumDetail = ({album}) => {
 
 const styles = {
   headerContentStyle: {
-    flexDirection: 'column',
-    justifyContent: 'space-around'
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'baseline',
+    flexGrow: 1,
   },
   headerTextStyle: {
     fontSize: 18

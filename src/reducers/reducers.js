@@ -1,6 +1,7 @@
 const defaultState = {
   query: '',
-  albums: []
+  albums: [],
+  artists: null
 }
 
 export default function(state=defaultState, action){

@@ -15,6 +15,7 @@ export default class App extends React.Component {
 
 
   render() {
+    console.ignoredYellowBox = ['Remote debugger'];
     const store = createStore(reducer, applyMiddleware(thunk))
     return (
       <Provider store={store}>
